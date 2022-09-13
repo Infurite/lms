@@ -1,0 +1,2 @@
+INSERT INTO tenant(tenant_id, name, description, created_at, updated_at) VALUES
+('{dd1b2305-8727-4be2-86a3-b739a84cff67}', 'Default tenant', 'Tenant for tests', '2022-01-11 19:30:07.749+00', '2022-01-11 19:30:07.749+00')

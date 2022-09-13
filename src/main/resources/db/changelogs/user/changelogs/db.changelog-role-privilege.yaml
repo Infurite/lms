@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-role-privilege-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: role_privilege
+            columns:
+              - column:
+                  name: role_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: privilege_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: role_id, privilege_id
+            constraintName: pk_role_privilege
+            tableName: role_privilege
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: role_privilege
+            constraintName: fk_role_role_privilege
+            referencedColumnNames: role_id
+            referencedTableName: role
+        - addForeignKeyConstraint:
+            baseColumnNames: privilege_id
+            baseTableName: role_privilege
+            constraintName: fk_privilege_role_privilege
+            referencedColumnNames: privilege_id
+            referencedTableName: privilege
+        - addUniqueConstraint:
+            columnNames: role_id,privilege_id
+            constraintName: uc_role_privilege
+            tableName: role_privilege
+  - changeSet:
+      id: initialize_role-privilege
+      author: maksim.hlushneu@gmail.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: initialize/role-privilege.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

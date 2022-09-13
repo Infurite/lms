@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-account-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_account
+              - column:
+                  name: first_name
+                  type: varchar(35)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(35)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_of_birth
+                  type: Date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: img
+                  type: varchar(100)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: account
+            constraintName: fk_account_users
+            referencedColumnNames: user_id
+            referencedTableName: users
+        - addUniqueConstraint:
+            columnNames: user_id
+            constraintName: uc_user_id_account
+            tableName: account

@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - include:
+      file: changelogs/db.changelog-client.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-role.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-privilege.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-role-privilege.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-users.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-user-role.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-account.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-user-token.yaml
+      relativeToChangelogFile: true

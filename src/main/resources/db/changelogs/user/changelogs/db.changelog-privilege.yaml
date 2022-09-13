@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-privilege-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: privilege
+            columns:
+              - column:
+                  name: privilege_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_privilege
+              - column:
+                  name: resource
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: action
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(150)
+        - addUniqueConstraint:
+            columnNames: resource, action
+            constraintName: uc_name_privilege
+            tableName: privilege
+  - changeSet:
+      id: initialize_privileges
+      author: maksim.hlushneu@gmail.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: initialize/privilege.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

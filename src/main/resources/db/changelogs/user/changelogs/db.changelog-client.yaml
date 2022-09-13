@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-oauth-client-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: oauth_client
+            columns:
+              - column:
+                  name: client_id
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_client
+              - column:
+                  name: resource_ids
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: client_secret
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: scope
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: grant_types
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authorities
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: access_token_expiration
+                  type: Integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: refresh_token_expiration
+                  type: Integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_information
+                  type: varchar(400)
+              - column:
+                  name: auto_approve
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: client_id
+            constraintName: uc_client_id
+            tableName: oauth_client
+  - changeSet:
+      id: initialize_clients
+      author: maksim.hlushneu@gmail.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: initialize/oauth-client.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

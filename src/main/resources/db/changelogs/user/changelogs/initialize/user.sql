@@ -1,0 +1,2 @@
+INSERT INTO users(user_id, tenant_id, email, password, is_locked, is_deleted, is_activated) values
+('{dd1b2305-8828-4be2-86a3-b739a84cff67}', '{dd1b2305-8727-4be2-86a3-b739a84cff67}', 'admin@gmail.com', '$2a$10$YMIg1CUPzt71MllYF0kUpurJbk0kOTcD11hbvCet7Kv69GR5MVaAO', false, false, true)

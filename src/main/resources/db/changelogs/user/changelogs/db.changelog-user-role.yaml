@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-role-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: user_id, role_id
+            constraintName: pk_user_role
+            tableName: user_role
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_role
+            constraintName: fk_user_user_role
+            referencedColumnNames: user_id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user_role
+            constraintName: fk_role_user_role
+            referencedColumnNames: role_id
+            referencedTableName: role
+        - addUniqueConstraint:
+            columnNames: user_id, role_id
+            constraintName: uc_user_role
+            tableName: user_role
+  - changeSet:
+      id: initialize_user_roles
+      author: maksim.hlushneu@gmail.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            encoding: utf8
+            path: initialize/user-role.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

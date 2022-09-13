@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-course-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: course_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_course
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(300)
+              - column:
+                  name: img
+                  type: varchar(100)
+        - addForeignKeyConstraint:
+            baseColumnNames: group_id
+            baseTableName: course
+            constraintName: fk_course_groups
+            referencedColumnNames: group_id
+            referencedTableName: groups

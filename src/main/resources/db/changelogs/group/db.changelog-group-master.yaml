@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: changelogs/db.changelog-group.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-group-user.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-course.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changelogs/db.changelog-lesson.yaml
+      relativeToChangelogFile: true

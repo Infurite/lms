@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-group-user-table
+      author: temchikm@gmail.com
+      changes:
+        - createTable:
+            tableName: group_user
+            columns:
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            columnNames: group_id, user_id
+            constraintName: pk_group_user
+            tableName: group_user
+        - addForeignKeyConstraint:
+            baseColumnNames: group_id
+            baseTableName: group_user
+            constraintName: fk_group_group_user
+            referencedColumnNames: group_id
+            referencedTableName: groups
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: group_user
+            constraintName: fk_user_group_user
+            referencedColumnNames: user_id
+            referencedTableName: users
